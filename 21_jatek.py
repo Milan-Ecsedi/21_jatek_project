@@ -20,7 +20,13 @@ class FeketeJatek:
     def __init__(self, root):
         self.root = root
         self.root.title("Huszonegyes")
-        img = tk.PhotoImage(file='./icon.png')
+        myappid = u'mycompany.myproduct.subproduct.version'
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+       # KI KELL PRÓBÁLNI, TASKBAR IKON MEGJELENÍTÉSE
+       # img = tk.PhotoImage(file='./icon.png')
+       # icon = Image.open(file='./icon.png')
+       # icon = ImageTk.PhotoImage(icon)
+       # root.iconphoto(True, icon)
         root.iconphoto(False, img)
         root.iconbitmap(r"./icon.ico")
         self.root.configure(bg='#2E2E2E')
