@@ -9,6 +9,7 @@ import Jatekos
 # Magyar kártya színek és értékek
 SZINEK = ["Piros", "Tök", "Zöld", "Makk"]
 ERTEKEK = [None, None, None, None, None, None, None, "7", "8", "9", "10", "Alsó", "Felső", "Király", "Ász"]
+
 #Kartya class különítve Kartya fileba 
 
 #Pakli class különítve Pakli fileba 
@@ -171,8 +172,8 @@ class FeketeJatek:
             self.oszto.kartyak = []
             self.pakli = Pakli.Pakli()
             self.current_tet = 0
-            self.huz_gomb.config(state=tk.NORMAL)
-            self.megall_gomb.config(state=tk.NORMAL)
+            self.huz_gomb.config(state=tk.DISABLED)
+            self.megall_gomb.config(state=tk.DISABLED)
             self.restart_gomb.config(state=tk.DISABLED)
             self.tet_gomb.config(state=tk.NORMAL)  # Tét gomb újra engedélyezése
             self.kezdeti_osztas()
