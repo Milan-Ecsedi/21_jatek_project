@@ -8,7 +8,7 @@ import Jatekos
 
 # Magyar kártya színek és értékek
 SZINEK = ["Piros", "Tök", "Zöld", "Makk"]
-ERTEKEK = [None, None, None, None, None, None, None, "7", "8", "9", "10", "Alsó", "Felső", "Király", "Ász"]
+ERTEKEK = ["7", "8", "9", "10", "Alsó", "Felső", "Király", "Ász"]
 
 #Kartya class különítve Kartya fileba 
 
