@@ -41,6 +41,13 @@ class FeketeJatek:
             'activeforeground': 'white'
         }
 
+        self.canvas.create_text(550, 50, text="Osztó", fill="white", font=("Arial", 16, 'bold'), anchor=tk.S)
+        self.canvas.create_text(550, 80, text=f"Érték: {self.oszto.kez_ertek() if self.current_tet > 0 else '???'}", fill="white", font=("Arial", 14), anchor=tk.S)
+
+        self.canvas.create_text(100, 50, text="Játékos", fill="white", font=("Arial", 16, 'bold'), anchor=tk.S)
+        self.canvas.create_text(100, 80, text=f"Érték: {self.jatekos.kez_ertek() if self.current_tet > 0 else '???'}", fill="white", font=("Arial", 14), anchor=tk.S)
+
+
         self.huz_gomb = tk.Button(root, text="Húzni", command=self.jatekos_huz, **self.button_style)
         self.huz_gomb.pack(side=tk.LEFT, padx=20)
         self.huz_gomb.config(state=tk.DISABLED)  # Alapból letiltjuk
@@ -134,7 +141,7 @@ class FeketeJatek:
 
         self.canvas.create_text(100, 50, text="Játékos", fill="white", font=("Arial", 16, 'bold'), anchor=tk.S)
         self.canvas.create_text(100, 80, text=f"Érték: {self.jatekos.kez_ertek() if self.current_tet > 0 else '???'}", fill="white", font=("Arial", 14), anchor=tk.S)
-
+        self.canvas.create_text(350, 400, text=f"Egyenleg: {self.jatekos.egyenleg} Ft", fill="white", font=("Arial", 18, 'bold'))
         # További megjelenítési logika, képek stb.
 
 
@@ -176,14 +183,15 @@ class FeketeJatek:
             self.megall_gomb.config(state=tk.DISABLED)
             self.restart_gomb.config(state=tk.DISABLED)
             self.tet_gomb.config(state=tk.NORMAL)  # Tét gomb újra engedélyezése
+            self.canvas.delete("all")
             self.kezdeti_osztas()
-            self.frissit_ablak()
+            self.canvas.create_text(350, 400, text=f"Egyenleg: {self.jatekos.egyenleg} Ft", fill="white", font=("Arial", 18, 'bold'))
         else:
             self.canvas.create_text(350, 370, text="Játék vége! Nincs több pénzed.", fill="red", font=("Arial", 18, 'bold'))
 
     def jatek_inditas(self):
         self.kezdeti_osztas()
-        self.frissit_ablak()
+        self.canvas.create_text(350, 400, text=f"Egyenleg: {self.jatekos.egyenleg} Ft", fill="white", font=("Arial", 18, 'bold'))
 
 # Fő ablak
 root = tk.Tk()

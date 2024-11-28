@@ -9,7 +9,7 @@ class Kartya:
         self.szin = szin
         self.kep_ut = f"kartyakepek/{SZINEK[szin]}_{ERTEKEK[ertek]}.png"
         if not os.path.exists(self.kep_ut):  # Ellenőrizzük, hogy létezik-e a kép
-            self.kep_ut = "kartyakepek/blank.png"  # Ha nem tudna valami okból megtaalálni a képet
+            self.kep_ut = "kartyakepek/blank.png"  # Ha nem tudna valami okból találni képet
 
     def __str__(self):
         return f"{ERTEKEK[self.ertek]} {SZINEK[self.szin]}"
