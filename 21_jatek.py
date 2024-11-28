@@ -20,6 +20,9 @@ class FeketeJatek:
     def __init__(self, root):
         self.root = root
         self.root.title("Huszonegyes")
+        img = tk.PhotoImage(file='./icon.png')
+        root.iconphoto(False, img)
+        root.iconbitmap(r"./icon.ico")
         self.root.configure(bg='#2E2E2E')
         self.pakli = Pakli.Pakli()
         self.jatekos = Jatekos.Jatekos("Játékos")
@@ -185,6 +188,10 @@ class FeketeJatek:
             self.tet_gomb.config(state=tk.NORMAL)  # Tét gomb újra engedélyezése
             self.canvas.delete("all")
             self.kezdeti_osztas()
+            self.canvas.create_text(100, 50, text="Játékos", fill="white", font=("Arial", 16, 'bold'), anchor=tk.S)
+            self.canvas.create_text(100, 80, text=f"Érték: {self.jatekos.kez_ertek() if self.current_tet > 0 else '???'}", fill="white", font=("Arial", 14), anchor=tk.S)
+            self.canvas.create_text(550, 50, text="Osztó", fill="white", font=("Arial", 16, 'bold'), anchor=tk.S)
+            self.canvas.create_text(550, 80, text=f"Érték: {self.oszto.kez_ertek() if self.current_tet > 0 else '???'}", fill="white", font=("Arial", 14), anchor=tk.S)
             self.canvas.create_text(350, 400, text=f"Egyenleg: {self.jatekos.egyenleg} Ft", fill="white", font=("Arial", 18, 'bold'))
         else:
             self.canvas.create_text(350, 370, text="Játék vége! Nincs több pénzed.", fill="red", font=("Arial", 18, 'bold'))
@@ -197,8 +204,5 @@ class FeketeJatek:
 root = tk.Tk()
 jatek = FeketeJatek(root)
 jatek.jatek_inditas()
-img = tk.PhotoImage(file='./icon.png')
-root.iconphoto(False, img)
-root.iconbitmap(r"./icon.ico")
 root.mainloop()
-tk.tk
+tk.Tk
