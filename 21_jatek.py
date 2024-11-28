@@ -1,8 +1,8 @@
 import tkinter as tk
 from random import shuffle
 import os
-from PIL import Image, ImageTk
-import ctypes
+from PIL import Image, ImageTk #pip install pillow
+import pygame #pip install pygame (A játék hangjához)
 import Pakli
 import Jatekos
 
@@ -79,6 +79,18 @@ class FeketeJatek:
             self.jatekos.kartyat_hozzaad(self.pakli.huz())
             self.oszto.kartyat_hozzaad(self.pakli.huz())
 
+
+
+    def huzHang(self):
+        pygame.mixer.init()
+        pygame.mixer.music.load("./sounds/pickingCard.mp3")
+        pygame.mixer.music.play()
+
+    def kartyaMutatHang(self):
+        pygame.mixer.init()
+        pygame.mixer.music.load("./sounds/flipingCard.mp3")
+        pygame.mixer.music.play()
+
     def tet_beallit(self):
         try:
             tet = int(self.tet_berak.get())
@@ -89,6 +101,7 @@ class FeketeJatek:
             self.huz_gomb.config(state=tk.NORMAL)  # Húzás gomb engedélyezése
             self.megall_gomb.config(state=tk.NORMAL)
             self.frissit_ablak()
+            self.kartyaMutatHang()
             # Tét összegének frissítése
             self.tet_ossz.config(text=f"Jelenlegi tét: {self.current_tet} Ft")
         except ValueError as e:
@@ -97,6 +110,7 @@ class FeketeJatek:
     def jatekos_huz(self):
         self.jatekos.kartyat_hozzaad(self.pakli.huz())
         self.frissit_ablak()
+        self.huzHang()
         if self.jatekos.kez_ertek() >= 21:
             self.jatek_vege()
 
