@@ -251,6 +251,6 @@ jatek = FeketeJatek(root)
 jatek.jatek_inditas()
 img = tk.PhotoImage(file='./icon.png')
 root.iconphoto(False, img)
-
+root.title("21-es játék")
 root.mainloop()
 tk.tk
