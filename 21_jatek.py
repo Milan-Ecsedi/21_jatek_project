@@ -3,87 +3,26 @@ from random import shuffle
 import os
 from PIL import Image, ImageTk
 import ctypes
-
+import Pakli
+import Jatekos
 
 # Magyar kártya színek és értékek
 SZINEK = ["Piros", "Tök", "Zöld", "Makk"]
 ERTEKEK = [None, None, None, None, None, None, None, "7", "8", "9", "10", "Alsó", "Felső", "Király", "Ász"]
+#Kartya class különítve Kartya fileba 
 
-class Kartya:
-    def __init__(self, ertek, szin):
-        self.ertek = ertek
-        self.szin = szin
-        self.kep_ut = f"kartyakepek/{SZINEK[szin]}_{ERTEKEK[ertek]}.png"
-        if not os.path.exists(self.kep_ut):  # Ellenőrizzük, hogy létezik-e a kép
-            self.kep_ut = "kartyakepek/blank.png"  # Ha nem tudna valami okból megtaalálni a képet
+#Pakli class különítve Pakli fileba 
 
-    def __str__(self):
-        return f"{ERTEKEK[self.ertek]} {SZINEK[self.szin]}"
-
-    def ertekeles(self):
-        if self.ertek == 14:  # Ász
-            return 11
-        elif self.ertek == 13:  # Király
-            return 4
-        elif self.ertek == 12:  # Felső
-            return 3
-        elif self.ertek == 11:  # Alsó
-            return 2
-        elif 7 <= self.ertek <= 10:  # 7, 8, 9, 10 értéke azonos a számukkal
-            return self.ertek
-        return 0
-
-class Pakli:
-    def __init__(self):
-        self.kartyak = [Kartya(ertek, szin) for ertek in range(7, 15) for szin in range(4)]
-        shuffle(self.kartyak)
-
-    def huz(self):
-        return self.kartyak.pop() if self.kartyak else None
-
-
-class Jatekos:
-    def __init__(self, nev, egyenleg=1000):
-        self.nev = nev
-        self.kartyak = []
-        self.egyenleg = egyenleg
-
-    def kez_ertek(self):
-        osszeg = sum(kartya.ertekeles() for kartya in self.kartyak)
-        aszok_szama = sum(1 for kartya in self.kartyak if kartya.ertek == 14)
-
-        # Két ász esetén automatikusan 21
-        if aszok_szama == 2 and len(self.kartyak) == 2:
-            return 21
-
-        # Ász értékének csökkentése 11-ről 1-re, ha szükséges
-        while osszeg > 21 and aszok_szama:
-            osszeg -= 10
-            aszok_szama -= 1
-        return osszeg
-
-
-    def kartyat_hozzaad(self, kartya):
-        self.kartyak.append(kartya)
-
-    def tet(self, osszeg):
-        if 0 < osszeg <= self.egyenleg:
-            self.egyenleg -= osszeg
-            return osszeg
-        return 0
-
-    def nyer(self, osszeg):
-        self.egyenleg += osszeg
-        return osszeg
+#Jatekos class különítve Jatekos fileba 
 
 class FeketeJatek:
     def __init__(self, root):
         self.root = root
-        self.root.title("Blackjack")
+        self.root.title("Huszonegyes")
         self.root.configure(bg='#2E2E2E')
-        self.pakli = Pakli()
-        self.jatekos = Jatekos("Játékos")
-        self.oszto = Jatekos("Osztó")
+        self.pakli = Pakli.Pakli()
+        self.jatekos = Jatekos.Jatekos("Játékos")
+        self.oszto = Jatekos.Jatekos("Osztó")
         self.current_tet = 0
         self.canvas = tk.Canvas(root, width=720, height=450, bg="#1F1F1F")
         self.canvas.pack(padx=20, pady=20)
@@ -230,7 +169,7 @@ class FeketeJatek:
         if self.jatekos.egyenleg > 0:
             self.jatekos.kartyak = []
             self.oszto.kartyak = []
-            self.pakli = Pakli()
+            self.pakli = Pakli.Pakli()
             self.current_tet = 0
             self.huz_gomb.config(state=tk.NORMAL)
             self.megall_gomb.config(state=tk.NORMAL)
@@ -251,7 +190,6 @@ jatek = FeketeJatek(root)
 jatek.jatek_inditas()
 img = tk.PhotoImage(file='./icon.png')
 root.iconphoto(False, img)
-root.title("21-es játék")
 root.iconbitmap(r"./icon.ico")
 root.mainloop()
 tk.tk
