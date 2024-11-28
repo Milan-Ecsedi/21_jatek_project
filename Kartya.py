@@ -1,7 +1,7 @@
 import os
 
 SZINEK = ["Piros", "Tök", "Zöld", "Makk"]
-ERTEKEK = [None, None, None, None, None, None, None, "7", "8", "9", "10", "Alsó", "Felső", "Király", "Ász"]
+ERTEKEK = ["7", "8", "9", "10", "Alsó", "Felső", "Király", "Ász"]
 
 class Kartya:
     def __init__(self, ertek, szin):
