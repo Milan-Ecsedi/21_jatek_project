@@ -2,6 +2,7 @@ import tkinter as tk
 from random import shuffle
 import os
 from PIL import Image, ImageTk
+import ctypes
 
 
 # Magyar kártya színek és értékek
@@ -14,7 +15,7 @@ class Kartya:
         self.szin = szin
         self.kep_ut = f"kartyakepek/{SZINEK[szin]}_{ERTEKEK[ertek]}.png"
         if not os.path.exists(self.kep_ut):  # Ellenőrizzük, hogy létezik-e a kép
-            self.kep_ut = "kartyakepek/blank.png"  # Alapértelmezett kép
+            self.kep_ut = "kartyakepek/blank.png"  # Ha nem tudna valami okból megtaalálni a képet
 
     def __str__(self):
         return f"{ERTEKEK[self.ertek]} {SZINEK[self.szin]}"
@@ -248,5 +249,8 @@ class FeketeJatek:
 root = tk.Tk()
 jatek = FeketeJatek(root)
 jatek.jatek_inditas()
+img = tk.PhotoImage(file='./icon.png')
+root.iconphoto(False, img)
+
 root.mainloop()
 tk.tk
