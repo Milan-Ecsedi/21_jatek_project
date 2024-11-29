@@ -1,3 +1,4 @@
+import ctypes
 import tkinter as tk
 from random import shuffle
 import os
@@ -20,15 +21,15 @@ class FeketeJatek:
     def __init__(self, root):
         self.root = root
         self.root.title("Huszonegyes")
-        myappid = u'mycompany.myproduct.subproduct.version'
-        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
-       # KI KELL PRÓBÁLNI, TASKBAR IKON MEGJELENÍTÉSE
-       # img = tk.PhotoImage(file='./icon.png')
-       # icon = Image.open(file='./icon.png')
-       # icon = ImageTk.PhotoImage(icon)
-       # root.iconphoto(True, icon)
-        root.iconphoto(False, img)
-        root.iconbitmap(r"./icon.ico")
+        #myappid = u'mycompany.myproduct.subproduct.version'
+        #ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+        # KI KELL PRÓBÁLNI, TASKBAR IKON MEGJELENÍTÉSE
+        #img = tk.PhotoImage(file='./icon.png')
+        #icon = Image.open(img)
+        #icon = ImageTk.PhotoImage(icon)
+        #root.iconphoto(True, icon)
+        #root.iconphoto(False, img)
+        #root.iconbitmap(r"./icon.ico")
         self.root.configure(bg='#2E2E2E')
         self.pakli = Pakli.Pakli()
         self.jatekos = Jatekos.Jatekos("Játékos")
@@ -36,6 +37,10 @@ class FeketeJatek:
         self.current_tet = 0
         self.canvas = tk.Canvas(root, width=720, height=450, bg="#1F1F1F")
         self.canvas.pack(padx=20, pady=20)
+        root.attributes("-fullscreen", True)
+        root.bind("<F11>", lambda event: root.attributes("-fullscreen", not root.attributes("-fullscreen")))
+        root.bind("<Escape>", lambda event: root.attributes("-fullscreen", False))
+        
 
         self.button_style = {
             'font': ('Arial', 14, 'bold'),

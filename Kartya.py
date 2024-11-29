@@ -12,17 +12,17 @@ class Kartya:
             self.kep_ut = "kartyakepek/blank.png"  # Ha nem tudna valami okból találni képet
 
     def __str__(self):
-        return f"{ERTEKEK[self.ertek]} {SZINEK[self.szin]}"
+        return f"{SZINEK[self.szin]} {ERTEKEK[self.ertek]}"
 
     def ertekeles(self):
-        if self.ertek == 14:  # Ász
+        if self.ertek == 8:  # Ász
             return 11
-        elif self.ertek == 13:  # Király
+        elif self.ertek == 7:  # Király
             return 4
-        elif self.ertek == 12:  # Felső
+        elif self.ertek == 6:  # Felső
             return 3
-        elif self.ertek == 11:  # Alsó
+        elif self.ertek == 5:  # Alsó
             return 2
-        elif 7 <= self.ertek <= 10:  # 7, 8, 9, 10 értéke azonos a számukkal
-            return self.ertek
+        elif 1 <= self.ertek <= 4:  # 7, 8, 9, 10 értéke azonos a számukkal
+            return self.ertek + 6 #MERT a tömb indexet kapja meg értéknek ezért hozzá kell adnunk 6-ot hogy a kártyák eredeti értéke legyen
         return 0
