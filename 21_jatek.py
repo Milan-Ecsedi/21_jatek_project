@@ -21,9 +21,9 @@ class FeketeJatek:
     def __init__(self, root):
         self.root = root
         self.root.title("Huszonegyes")
+        # KI KELL PRÓBÁLNI, TASKBAR IKON MEGJELENÍTÉSE
         #myappid = u'mycompany.myproduct.subproduct.version'
         #ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
-        # KI KELL PRÓBÁLNI, TASKBAR IKON MEGJELENÍTÉSE
         #img = tk.PhotoImage(file='./icon.png')
         #icon = Image.open(img)
         #icon = ImageTk.PhotoImage(icon)
@@ -38,10 +38,8 @@ class FeketeJatek:
         self.canvas = tk.Canvas(root, width=720, height=450, bg="#1F1F1F")
         self.canvas.pack(padx=20, pady=20)
         root.attributes("-fullscreen", True)
-        root.bind("<F11>", lambda event: root.attributes("-fullscreen", not root.attributes("-fullscreen")))
-        root.bind("<Escape>", lambda event: root.attributes("-fullscreen", False))
-        
-
+        root.bind("<F11>", lambda event: root.attributes("-fullscreen", not root.attributes("-fullscreen"))) #F11-el ki-be lehet lépni az ablakból
+        root.bind("<Escape>", lambda event: root.attributes("-fullscreen", False)) #Esc-el ki lehet lépni az ablakból
         self.button_style = {
             'font': ('Arial', 14, 'bold'),
             'bg': '#4CAF50',
@@ -63,27 +61,27 @@ class FeketeJatek:
 
 
         self.huz_gomb = tk.Button(root, text="Húzni", command=self.jatekos_huz, **self.button_style)
-        self.huz_gomb.pack(side=tk.LEFT, padx=20)
+        self.huz_gomb.pack(side=tk.LEFT, padx=100)
         self.huz_gomb.config(state=tk.DISABLED)  # Alapból letiltjuk
 
         self.megall_gomb = tk.Button(root, text="Megállni", command=self.jatekos_megall, **self.button_style)
-        self.megall_gomb.pack(side=tk.LEFT, padx=20)
+        self.megall_gomb.pack(side=tk.LEFT, padx=50)
         self.megall_gomb.config(state=tk.DISABLED)
 
         self.restart_gomb = tk.Button(root, text="Újraindítás", command=self.restart, **self.button_style)
-        self.restart_gomb.pack(side=tk.BOTTOM, pady=20)
+        self.restart_gomb.pack(side=tk.BOTTOM, pady=30)
         self.restart_gomb.config(state=tk.DISABLED)
 
         self.tet_keres = tk.Label(root, text="Tét: ", font=('Arial', 12, 'bold'), fg='white', bg='#2E2E2E')
-        self.tet_keres.pack(pady=10)
+        self.tet_keres.pack(pady=5)
 
         self.tet_berak = tk.Entry(root, font=('Arial', 12), width=15)
-        self.tet_berak.pack(pady=10)
+        self.tet_berak.pack(pady=5)
 
-        self.tet_gomb = tk.Button(root, text="Tét felhelyezése", command=self.tet_beallit, **self.button_style) #itt vagyunk
-        self.tet_gomb.pack(pady=10)
+        self.tet_gomb = tk.Button(root, text="Tét felhelyezése", command=self.tet_beallit, **self.button_style)
+        self.tet_gomb.pack(pady=5)
         self.tet_ossz = tk.Label(root, text="Jelenlegi tét: 0 Ft", font=('Arial', 12, 'bold'), fg='white', bg='#2E2E2E')
-        self.tet_ossz.pack(pady=10)
+        self.tet_ossz.pack(pady=5)
 
     def kezdeti_osztas(self):
         for _ in range(2):
@@ -190,7 +188,7 @@ class FeketeJatek:
         for kartya in self.oszto.kartyak:
         # Kép betöltése és átméretezése
             original_image = Image.open(kartya.kep_ut)
-            resized_image = original_image.resize((50, 75))  # Átméretezés
+            resized_image = original_image.resize((50, 75))
             kartya_kep = ImageTk.PhotoImage(resized_image)
             self.kartyakepek.append(kartya_kep)
 
