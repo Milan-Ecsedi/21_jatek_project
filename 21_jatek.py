@@ -9,7 +9,7 @@ import Jatekos
 
 # Magyar kártya színek és értékek
 SZINEK = ["Piros", "Tök", "Zöld", "Makk"]
-ERTEKEK = ["7", "8", "9", "10", "Alsó", "Felső", "Király", "Ász"]
+ERTEKEK = [None,None,None,None,None,None,None,"7", "8", "9", "10", "Alsó", "Felső", "Király", "Ász"]
 
 #Kartya class különítve Kartya fileba 
 
@@ -21,15 +21,16 @@ class FeketeJatek:
     def __init__(self, root):
         self.root = root
         self.root.title("Huszonegyes")
-        # KI KELL PRÓBÁLNI, TASKBAR IKON MEGJELENÍTÉSE
-        #myappid = u'mycompany.myproduct.subproduct.version'
-        #ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
-        #img = tk.PhotoImage(file='./icon.png')
-        #icon = Image.open(img)
-        #icon = ImageTk.PhotoImage(icon)
-        #root.iconphoto(True, icon)
-        #root.iconphoto(False, img)
-        #root.iconbitmap(r"./icon.ico")
+
+        # Egyedi alkalmazásazonosító beállítása a tálcához
+        myappid = u'mycompany.myproduct.subproduct.version'
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+        # Tálca ikon beállítása (ico formátum szükséges)
+        self.root.iconbitmap(r'./icon.ico')  # Ez jelenik meg a tálcán
+        # Az ablak bal felső sarkának ikonja (opcionális)
+        img = tk.PhotoImage(file='./icon.png')
+        self.root.iconphoto(True, img)
+
         self.root.configure(bg='#2E2E2E')
         self.pakli = Pakli.Pakli()
         self.jatekos = Jatekos.Jatekos("Játékos")
