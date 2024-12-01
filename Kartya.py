@@ -1,7 +1,7 @@
 import os
 
 SZINEK = ["Piros", "Tök", "Zöld", "Makk"]
-ERTEKEK = ["7", "8", "9", "10", "Alsó", "Felső", "Király", "Ász"]
+ERTEKEK = [None,None,None,None,None,None,None,"7", "8", "9", "10", "Alsó", "Felső", "Király", "Ász"]
 
 class Kartya:
     def __init__(self, ertek, szin):
@@ -15,14 +15,14 @@ class Kartya:
         return f"{SZINEK[self.szin]} {ERTEKEK[self.ertek]}"
 
     def ertekeles(self):
-        if self.ertek == 8:  # Ász
+        if self.ertek == 14:  # Ász
             return 11
-        elif self.ertek == 7:  # Király
+        elif self.ertek == 13:  # Király
             return 4
-        elif self.ertek == 6:  # Felső
+        elif self.ertek == 12:  # Felső
             return 3
-        elif self.ertek == 5:  # Alsó
+        elif self.ertek == 11:  # Alsó
             return 2
-        elif 1 <= self.ertek <= 4:  # 7, 8, 9, 10 értéke azonos a számukkal
-            return self.ertek + 6 #MERT a tömb indexet kapja meg értéknek ezért hozzá kell adnunk 6-ot hogy a kártyák eredeti értéke legyen
+        elif 7 <= self.ertek <= 10:  # 7, 8, 9, 10 értéke azonos a számukkal
+            return self.ertek
         return 0
